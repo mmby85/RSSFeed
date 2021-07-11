@@ -4,7 +4,7 @@ import xml.etree.ElementTree as et
 import xml.dom.minidom  
 import xml
 
-url = 'https://news.un.org/feed/subscribe/en/news/all/rss.xml'
+url = input('please enter an RSS Feed url : ')
 
 data = requests.get(url)
 
