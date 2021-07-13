@@ -4,42 +4,27 @@ import xml.etree.ElementTree as et
 import xml.dom.minidom  
 import xml
 
-
-
-
-
-
-url = 'https://news.un.org/feed/subscribe/en/news/all/rss.xml'
+url = input('Please enter an RSS Feed url :')
 
 data = requests.get(url)
 
 print(data.content)
 
 stree = et.fromstring(data.content)
-# root = tree.getroot()
 
-for i in stree[0]:   
-    if i.tag == 'item':
-        for j in i: 
-            # print(j.tag, j.attrib)
-            title = [ k.attrib for k in j if j.tag == 'title']
 
-items = stree[0].findall('item') #.findall('title')
+items = stree[0].findall('item')
 
-titles = [ i[0].text for i in items if i[0].tag == 'title']   
-descriptions = [ i[2].text for i in items if i[2].tag == 'description']   
-links = [ i[1].text for i in items if i[1].tag == 'link']   
+
+pos = [ i.tag for i in items[0] ]
+
+titles = [ i[pos.index('title')].text for i in items ]   
+descriptions =  [ i[pos.index('description')].text for i in items ]   
+links = [ i[pos.index('link')].text for i in items ]    
 
 print('RSS Feed : \n------------------------------------------------------')
 for i in range(len(titles)):
     print('\nTitle :' ,titles[i], '\nDescription : ' , descriptions[i], '\nLink : ', links[i], '\n')
     print('\n------------------------------------------------------')
 
-
-
-# rss = xml.dom.minidom.parseString(data.content).toprettyxml()
-
-# f = open('unrss.xml', 'w')
-# f.write(rss)
-
-# f.close()
+ 
