@@ -3,6 +3,8 @@ import requests
 import xml.etree.ElementTree as et
 import xml
 
+url = input('Please enter an RSS Feed url :')
+
 data = requests.get(url)
 
 print(data.content)
